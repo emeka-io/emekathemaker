@@ -1,66 +1,201 @@
-// Initialize Icons
-lucide.createIcons();
+document.addEventListener("DOMContentLoaded", () => {
 
-// Set Year
-document.getElementById('year').textContent = new Date().getFullYear();
+```
+/* --------------------------------
+   Lucide Icons
+-------------------------------- */
 
-// Theme Toggle Logic
-const themeToggleBtn = document.getElementById('theme-toggle');
-const htmlElement = document.documentElement;
-
-// Smoothly transition on load if saved
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-    htmlElement.setAttribute('data-theme', savedTheme);
+if (typeof lucide !== "undefined") {
+    lucide.createIcons();
 }
 
-themeToggleBtn.addEventListener('click', () => {
-    const currentTheme = htmlElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    
-    htmlElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
+
+/* --------------------------------
+   Theme
+-------------------------------- */
+
+const root = document.documentElement;
+const themeToggle = document.getElementById("theme-toggle");
+
+const savedTheme = localStorage.getItem("etm-theme");
+
+if (savedTheme === "dark" || savedTheme === "light") {
+    root.setAttribute("data-theme", savedTheme);
+} else {
+    const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+    ).matches;
+
+    root.setAttribute(
+        "data-theme",
+        prefersDark ? "dark" : "light"
+    );
+}
+
+function updateThemeLabel() {
+    const currentTheme = root.getAttribute("data-theme");
+
+    if (themeToggle) {
+        themeToggle.setAttribute(
+            "aria-label",
+            currentTheme === "dark"
+                ? "Switch to light mode"
+                : "Switch to dark mode"
+        );
+    }
+}
+
+updateThemeLabel();
+
+themeToggle?.addEventListener("click", () => {
+    const currentTheme = root.getAttribute("data-theme");
+    const newTheme =
+        currentTheme === "dark" ? "light" : "dark";
+
+    root.setAttribute("data-theme", newTheme);
+    localStorage.setItem("etm-theme", newTheme);
+
+    updateThemeLabel();
 });
 
-// Scroll Observer (Smoother revealing)
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.15
-};
 
-const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-        }
+/* --------------------------------
+   Mobile Navigation
+-------------------------------- */
+
+const mobileMenuButton =
+    document.querySelector(".mobile-menu-btn");
+
+const navLinks =
+    document.querySelector(".nav-links");
+
+mobileMenuButton?.addEventListener("click", () => {
+
+    const isOpen =
+        navLinks.classList.toggle("active");
+
+    mobileMenuButton.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+    );
+
+    const icon = mobileMenuButton.querySelector("svg");
+
+    if (icon) {
+        icon.setAttribute(
+            "data-lucide",
+            isOpen ? "x" : "menu"
+        );
+
+        lucide.createIcons();
+    }
+});
+
+
+/* --------------------------------
+   Close mobile menu after click
+-------------------------------- */
+
+document
+    .querySelectorAll(".nav-links a")
+    .forEach((link) => {
+
+        link.addEventListener("click", () => {
+            navLinks?.classList.remove("active");
+
+            mobileMenuButton?.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            const icon =
+                mobileMenuButton?.querySelector("svg");
+
+            if (icon) {
+                icon.setAttribute(
+                    "data-lucide",
+                    "menu"
+                );
+
+                lucide.createIcons();
+            }
+        });
     });
-}, observerOptions);
 
-document.querySelectorAll('.fade-in').forEach(element => {
+
+/* --------------------------------
+   Scroll reveal
+-------------------------------- */
+
+const revealElements =
+    document.querySelectorAll(".fade-in");
+
+const observer =
+    new IntersectionObserver(
+        (entries, observer) => {
+
+            entries.forEach((entry) => {
+
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.12,
+            rootMargin: "0px 0px -40px 0px"
+        }
+    );
+
+revealElements.forEach((element) => {
     observer.observe(element);
 });
 
-// Mobile Nav Toggle
-const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-const navLinks = document.querySelector('.nav-links');
 
-mobileMenuBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-});
+/* --------------------------------
+   Current year
+-------------------------------- */
 
-// Close mobile nav on click
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        if(window.innerWidth <= 768) {
-            navLinks.classList.remove('active');
+const yearElement =
+    document.getElementById("year");
+
+if (yearElement) {
+    yearElement.textContent =
+        new Date().getFullYear();
+}
+
+
+/* --------------------------------
+   Keyboard accessibility
+-------------------------------- */
+
+document.addEventListener("keydown", (event) => {
+
+    if (event.key === "Escape") {
+
+        navLinks?.classList.remove("active");
+
+        mobileMenuButton?.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+        const icon =
+            mobileMenuButton?.querySelector("svg");
+
+        if (icon) {
+            icon.setAttribute(
+                "data-lucide",
+                "menu"
+            );
+
+            lucide.createIcons();
         }
-    });
-});
-
-window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
-        navLinks.classList.remove('active');
     }
+});
+```
+
 });
