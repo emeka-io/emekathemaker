@@ -1,4 +1,4 @@
-// Initialize Lucide Icons for clean line art visuals
+//Initialize Lucide Icons for clean line art visuals
 lucide.createIcons();
 
 // Set Dynamic Current Year in Footer
