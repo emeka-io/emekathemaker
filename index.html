@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,9 +16,10 @@
     <meta property="og:description" content="Portfolio of Chukwuemeka Ifeanyi, specializing in robotics, embedded firmware, and autonomous systems.">
     <meta property="og:image" content="https://emekathemaker.shop/og-image.jpg">
 
+    <!-- Premium Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <link rel="stylesheet" href="style.css">
@@ -26,17 +27,28 @@
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#home" class="brand">
-                <img src="logo.png" alt="Emeka Logo" class="brand-logo" onerror="this.style.display='none'">
-                <span class="brand-text">Emeka</span>
-            </a>
+            <div class="brand-cluster">
+                <a href="#home" class="brand">
+                    <img src="logo.png" alt="Emeka Logo" class="brand-logo" onerror="this.style.display='none'">
+                    <span class="brand-text">EMEKA THE MAKER</span>
+                </a>
+                <span class="shop-badge">Shop Coming Soon</span>
+            </div>
+            
             <div class="nav-links">
                 <a href="#about">About</a>
                 <a href="#expertise">Expertise</a>
                 <a href="#projects">Projects</a>
                 <a href="#contact" class="btn btn-outline">Let's Talk</a>
             </div>
-            <button class="mobile-menu-btn" aria-label="Toggle Menu"><i data-lucide="menu"></i></button>
+            
+            <div class="nav-controls">
+                <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+                    <i data-lucide="moon" class="icon-moon"></i>
+                    <i data-lucide="sun" class="icon-sun"></i>
+                </button>
+                <button class="mobile-menu-btn" aria-label="Toggle Menu"><i data-lucide="menu"></i></button>
+            </div>
         </div>
     </nav>
 
@@ -45,7 +57,7 @@
             <div class="hero-badge">
                 <i data-lucide="cpu" class="badge-icon"></i> Mechatronics Engineering
             </div>
-            <h1>Building the intersection of <span class="text-blue">code</span> and <span class="text-blue">machinery</span>.</h1>
+            <h1>Building the intersection of <span class="text-gradient">code</span> and <span class="text-gradient">machinery</span>.</h1>
             <p>I design embedded systems, program microcontrollers, and develop logic for autonomous robotics and environmental monitoring.</p>
             <div class="hero-actions">
                 <a href="#projects" class="btn btn-primary">View Projects</a>
@@ -76,7 +88,7 @@
                     <div class="stat-card">
                         <i data-lucide="wrench" class="stat-icon"></i>
                         <h3>Tools</h3>
-                        <p>MATLAB/Simulink, KiCad, Onshape</p>
+                        <p>ROS 2, MATLAB/Simulink, KiCad, Onshape</p>
                     </div>
                     <div class="stat-card">
                         <i data-lucide="microchip" class="stat-icon"></i>
@@ -88,7 +100,7 @@
         </div>
     </section>
 
-    <section class="expertise bg-light" id="expertise">
+    <section class="expertise bg-alt" id="expertise">
         <div class="container fade-in">
             <div class="section-header center">
                 <h2>What I Do</h2>
@@ -156,7 +168,7 @@
 
     <footer>
         <div class="container footer-content">
-            <div class="footer-brand">Emeka the Maker</div>
+            <div class="footer-brand">EMEKA THE MAKER</div>
             <div class="footer-social">
                 <a href="https://x.com/emekabuilds_?s=11" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
                     <i data-lucide="twitter"></i>
@@ -166,6 +178,9 @@
                 </a>
                 <a href="https://github.com/emeka-io" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                     <i data-lucide="github"></i>
+                </a>
+                <a href="https://instagram.com/builtby.emeka" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <i data-lucide="instagram"></i>
                 </a>
             </div>
             <div class="footer-copy">
