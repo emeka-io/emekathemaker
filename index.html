@@ -9,37 +9,26 @@
     <meta name="description" content="Portfolio of Chukwuemeka Ifeanyi, specializing in robotics, embedded firmware (C/C++), and autonomous systems hardware.">
     <link rel="icon" href="logo.png" type="image/png">
 
-    <!-- Open Graph / Social Previews -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://emekathemaker.shop/">
-    <meta property="og:title" content="Emeka the Maker | Mechatronics & Embedded Systems">
-    <meta property="og:description" content="Portfolio of Chukwuemeka Ifeanyi, specializing in robotics, embedded firmware, and autonomous systems.">
-    <meta property="og:image" content="https://emekathemaker.shop/og-image.jpg">
-
-    <!-- Premium Typography -->
+    <!-- Premium Typography: Plus Jakarta Sans (Headers) & Inter (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+    
     <script src="https://unpkg.com/lucide@latest"></script>
-
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <div class="brand-cluster">
-                <a href="#home" class="brand">
-                    <img src="logo.png" alt="Emeka Logo" class="brand-logo" onerror="this.style.display='none'">
-                    <span class="brand-text">EMEKA THE MAKER</span>
-                </a>
-                <span class="shop-badge">Shop Coming Soon</span>
-            </div>
+            <a href="#home" class="brand">
+                <span class="brand-text">EMEKA</span>
+            </a>
             
             <div class="nav-links">
                 <a href="#about">About</a>
                 <a href="#expertise">Expertise</a>
                 <a href="#projects">Projects</a>
-                <a href="#contact" class="btn btn-outline">Let's Talk</a>
+                <a href="#contact" class="btn-text">Let's Talk</a>
             </div>
             
             <div class="nav-controls">
@@ -54,15 +43,13 @@
 
     <header class="hero" id="home">
         <div class="hero-content fade-in">
-            <div class="hero-badge">
-                <i data-lucide="cpu" class="badge-icon"></i> Mechatronics Engineering
-            </div>
-            <h1>Building the intersection of <span class="text-gradient">code</span> and <span class="text-gradient">machinery</span>.</h1>
-            <p>I design embedded systems, program microcontrollers, and develop logic for autonomous robotics and environmental monitoring.</p>
+            <div class="hero-badge">Mechatronics Engineering</div>
+            <h1>The intersection of code and machinery.</h1>
+            <p>Designing embedded systems, programming microcontrollers, and developing logic for autonomous robotics and environmental monitoring.</p>
             <div class="hero-actions">
                 <a href="#projects" class="btn btn-primary">View Projects</a>
                 <a href="https://github.com/emeka-io" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-                    <i data-lucide="github"></i> GitHub
+                    GitHub <i data-lucide="arrow-up-right"></i>
                 </a>
             </div>
         </div>
@@ -71,121 +58,106 @@
     <section class="about" id="about">
         <div class="container fade-in">
             <div class="section-header">
-                <h2>About Me</h2>
-                <div class="divider"></div>
+                <h2>About</h2>
             </div>
             <div class="about-grid">
                 <div class="about-text">
                     <p>I am an undergraduate Mechatronics Engineering student at the Federal University of Technology, Akure, passionate about industrial automation, control engineering, and bringing hardware to life.</p>
-                    <p>My workflow spans designing electronic circuit schematics in KiCad, writing low-level firmware in C/C++, developing autonomous logic with ROS 2 and Python, and validating physical systems using MATLAB and Simulink. I believe in building tools that bridge the digital and physical worlds while documenting the engineering journey.</p>
+                    <p>My workflow spans designing electronic circuit schematics in KiCad, writing low-level firmware in C/C++, developing autonomous logic with ROS 2 and Python, and validating physical systems using MATLAB and Simulink. I believe in building tools that bridge the digital and physical worlds.</p>
                 </div>
                 <div class="about-stats">
-                    <div class="stat-card">
-                        <i data-lucide="code-2" class="stat-icon"></i>
-                        <h3>Languages</h3>
-                        <p>C, C++, Python, Bash</p>
+                    <div class="stat-item">
+                        <span class="stat-label">Languages</span>
+                        <span class="stat-value">C, C++, Python, Bash</span>
                     </div>
-                    <div class="stat-card">
-                        <i data-lucide="wrench" class="stat-icon"></i>
-                        <h3>Tools</h3>
-                        <p>ROS 2, MATLAB/Simulink, KiCad, Onshape</p>
+                    <div class="stat-item">
+                        <span class="stat-label">Tools</span>
+                        <span class="stat-value">ROS 2, MATLAB/Simulink, KiCad, Onshape</span>
                     </div>
-                    <div class="stat-card">
-                        <i data-lucide="microchip" class="stat-icon"></i>
-                        <h3>Hardware</h3>
-                        <p>Arduino, ESP32, STM32, Sensors & Actuators</p>
+                    <div class="stat-item">
+                        <span class="stat-label">Hardware</span>
+                        <span class="stat-value">Arduino, ESP32, STM32, Sensors</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="expertise bg-alt" id="expertise">
+    <section class="expertise" id="expertise">
         <div class="container fade-in">
-            <div class="section-header center">
-                <h2>What I Do</h2>
-                <p>Translating logical architecture into physical action.</p>
+            <div class="section-header">
+                <h2>Expertise</h2>
             </div>
             <div class="expertise-grid">
                 <div class="expertise-card">
-                    <div class="icon-wrapper"><i data-lucide="circuit-board"></i></div>
+                    <i data-lucide="cpu" class="card-icon"></i>
                     <h3>Embedded Systems</h3>
                     <p>Developing robust firmware for microcontrollers, managing sensor data acquisition, and implementing finite state machine architectures.</p>
                 </div>
                 <div class="expertise-card">
-                    <div class="icon-wrapper"><i data-lucide="bot"></i></div>
+                    <i data-lucide="combine" class="card-icon"></i>
                     <h3>Autonomous Robotics</h3>
                     <p>Building robotic platforms, from chassis assembly to motor control logic for line-following, obstacle avoidance, and ROS 2 integration.</p>
                 </div>
                 <div class="expertise-card">
-                    <div class="icon-wrapper"><i data-lucide="activity"></i></div>
+                    <i data-lucide="layers" class="card-icon"></i>
                     <h3>Hardware Integration</h3>
-                    <p>Designing smart systems combining environmental sensors, OLED displays, communication protocols (I2C/SPI), and real-time MATLAB visualization.</p>
+                    <p>Designing smart systems combining environmental sensors, OLED displays, communication protocols (I2C/SPI), and real-time visualization.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="projects" id="projects">
+    <section class="projects bg-subtle" id="projects">
         <div class="container fade-in">
             <div class="section-header">
                 <h2>Featured Work</h2>
-                <div class="divider"></div>
             </div>
             <div class="project-grid">
                 <div class="project-card">
                     <div class="project-content">
-                        <div class="project-tags"><span class="tag">Hardware</span><span class="tag">Sensors</span></div>
+                        <div class="project-tags">Hardware &middot; Sensors</div>
                         <h3>Genesis Environment Monitor</h3>
-                        <p>A standalone environmental sensing product evolving from breadboard prototypes. Features DHT11 integration, an RGB LED status interface, and non-blocking timing logic displayed on a 1.3-inch SH1106 OLED.</p>
+                        <p>A standalone environmental sensing product evolving from breadboard prototypes. Features DHT11 integration, an RGB LED status interface, and non-blocking timing logic.</p>
                     </div>
                 </div>
                 <div class="project-card">
                     <div class="project-content">
-                        <div class="project-tags"><span class="tag">Robotics</span><span class="tag">Control</span></div>
+                        <div class="project-tags">Robotics &middot; Control</div>
                         <h3>Autonomous 4WD Robot</h3>
-                        <p>A four-wheel-drive robotics platform built for line-following and obstacle avoidance with the Elites Electronics & Robotics Club. Involved chassis assembly, motor driver wiring, and embedded sensor thresholding.</p>
+                        <p>A four-wheel-drive robotics platform built for line-following and obstacle avoidance. Involved chassis assembly, motor driver wiring, and embedded sensor thresholding.</p>
                     </div>
                 </div>
                 <div class="project-card">
                     <div class="project-content">
-                        <div class="project-tags"><span class="tag">Research</span><span class="tag">Publication</span></div>
-                        <h3>Highway Security Surveillance Assessment</h3>
-                        <p>Co-authored an open-access research paper assessing CCTV surveillance infrastructure for enhancing highway security, focused on a case study of the Third Mainland Bridge in Lagos. Published on Zenodo.</p>
+                        <div class="project-tags">Research &middot; Publication</div>
+                        <h3>Highway Security Surveillance</h3>
+                        <p>Co-authored an open-access research paper assessing CCTV surveillance infrastructure for enhancing highway security. Published on Zenodo.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="contact bg-blue" id="contact">
-        <div class="container fade-in center">
-            <h2>Let's build something functional.</h2>
-            <p>Always open to collaborating on hardware projects, firmware challenges, or discussing mechatronics engineering.</p>
-            <a href="mailto:hello@emekathemaker.shop" class="btn btn-white">Get in Touch</a>
+    <section class="contact" id="contact">
+        <div class="container fade-in">
+            <div class="contact-box">
+                <h2>Let's build something functional.</h2>
+                <p>Always open to collaborating on hardware projects, firmware challenges, or discussing mechatronics engineering.</p>
+                <a href="mailto:hello@emekathemaker.shop" class="btn btn-primary">hello@emekathemaker.shop</a>
+            </div>
         </div>
     </section>
 
     <footer>
         <div class="container footer-content">
-            <div class="footer-brand">EMEKA THE MAKER</div>
-            <div class="footer-social">
-                <a href="https://x.com/emekabuilds_?s=11" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
-                    <i data-lucide="twitter"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/chukwuemeka-ifeanyi-profile" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                    <i data-lucide="linkedin"></i>
-                </a>
-                <a href="https://github.com/emeka-io" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                    <i data-lucide="github"></i>
-                </a>
-                <a href="https://instagram.com/builtby.emeka" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                    <i data-lucide="instagram"></i>
-                </a>
-            </div>
             <div class="footer-copy">
-                &copy; <span id="year"></span> Chukwuemeka Ifeanyi. All rights reserved.
+                &copy; <span id="year"></span> Chukwuemeka Ifeanyi.
             </div>
+            <div class="footer-social">
+                <a href="https://x.com/emekabuilds_?s=11" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><i data-lucide="twitter"></i></a>
+                <a href="https://www.linkedin.com/in/chukwuemeka-ifeanyi-profile" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                <a href="https://github.com/emeka-io" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i data-lucide="github"></i></a>
         </div>
     </footer>
 
