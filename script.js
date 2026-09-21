@@ -1,41 +1,48 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-```
-/* --------------------------------
-   Lucide Icons
--------------------------------- */
+    /* =====================================================
+       LUCIDE ICONS
+    ===================================================== */
 
-if (typeof lucide !== "undefined") {
-    lucide.createIcons();
-}
+    if (typeof lucide !== "undefined") {
+        lucide.createIcons();
+    }
 
 
-/* --------------------------------
-   Theme
--------------------------------- */
+    /* =====================================================
+       THEME
+    ===================================================== */
 
-const root = document.documentElement;
-const themeToggle = document.getElementById("theme-toggle");
+    const root = document.documentElement;
+    const themeToggle = document.getElementById("theme-toggle");
 
-const savedTheme = localStorage.getItem("etm-theme");
+    const savedTheme = localStorage.getItem("etm-theme");
 
-if (savedTheme === "dark" || savedTheme === "light") {
-    root.setAttribute("data-theme", savedTheme);
-} else {
-    const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-    ).matches;
+    if (savedTheme === "dark" || savedTheme === "light") {
 
-    root.setAttribute(
-        "data-theme",
-        prefersDark ? "dark" : "light"
-    );
-}
+        root.setAttribute("data-theme", savedTheme);
 
-function updateThemeLabel() {
-    const currentTheme = root.getAttribute("data-theme");
+    } else {
 
-    if (themeToggle) {
+        const prefersDark =
+            window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            ).matches;
+
+        root.setAttribute(
+            "data-theme",
+            prefersDark ? "dark" : "light"
+        );
+    }
+
+
+    function updateThemeAccessibility() {
+
+        const currentTheme =
+            root.getAttribute("data-theme");
+
+        if (!themeToggle) return;
+
         themeToggle.setAttribute(
             "aria-label",
             currentTheme === "dark"
@@ -43,151 +50,97 @@ function updateThemeLabel() {
                 : "Switch to dark mode"
         );
     }
-}
-
-updateThemeLabel();
-
-themeToggle?.addEventListener("click", () => {
-    const currentTheme = root.getAttribute("data-theme");
-    const newTheme =
-        currentTheme === "dark" ? "light" : "dark";
-
-    root.setAttribute("data-theme", newTheme);
-    localStorage.setItem("etm-theme", newTheme);
-
-    updateThemeLabel();
-});
 
 
-/* --------------------------------
-   Mobile Navigation
--------------------------------- */
+    updateThemeAccessibility();
 
-const mobileMenuButton =
-    document.querySelector(".mobile-menu-btn");
 
-const navLinks =
-    document.querySelector(".nav-links");
+    themeToggle?.addEventListener("click", () => {
 
-mobileMenuButton?.addEventListener("click", () => {
+        const currentTheme =
+            root.getAttribute("data-theme");
 
-    const isOpen =
-        navLinks.classList.toggle("active");
+        const newTheme =
+            currentTheme === "dark"
+                ? "light"
+                : "dark";
 
-    mobileMenuButton.setAttribute(
-        "aria-expanded",
-        String(isOpen)
-    );
-
-    const icon = mobileMenuButton.querySelector("svg");
-
-    if (icon) {
-        icon.setAttribute(
-            "data-lucide",
-            isOpen ? "x" : "menu"
+        root.setAttribute(
+            "data-theme",
+            newTheme
         );
 
-        lucide.createIcons();
-    }
-});
+        localStorage.setItem(
+            "etm-theme",
+            newTheme
+        );
 
+        updateThemeAccessibility();
 
-/* --------------------------------
-   Close mobile menu after click
--------------------------------- */
-
-document
-    .querySelectorAll(".nav-links a")
-    .forEach((link) => {
-
-        link.addEventListener("click", () => {
-            navLinks?.classList.remove("active");
-
-            mobileMenuButton?.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-            const icon =
-                mobileMenuButton?.querySelector("svg");
-
-            if (icon) {
-                icon.setAttribute(
-                    "data-lucide",
-                    "menu"
-                );
-
-                lucide.createIcons();
-            }
-        });
     });
 
 
-/* --------------------------------
-   Scroll reveal
--------------------------------- */
+    /* =====================================================
+       MENU
+    ===================================================== */
 
-const revealElements =
-    document.querySelectorAll(".fade-in");
+    const menuToggle =
+        document.getElementById("menu-toggle");
 
-const observer =
-    new IntersectionObserver(
-        (entries, observer) => {
+    const menuPanel =
+        document.getElementById("menu-panel");
 
-            entries.forEach((entry) => {
+    const menuIcon =
+        menuToggle?.querySelector(".menu-icon");
 
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("visible");
-                    observer.unobserve(entry.target);
-                }
 
-            });
+    function openMenu() {
 
-        },
-        {
-            threshold: 0.12,
-            rootMargin: "0px 0px -40px 0px"
+        if (!menuPanel || !menuToggle) return;
+
+        menuPanel.classList.add("open");
+
+        menuToggle.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+
+        menuToggle.setAttribute(
+            "aria-label",
+            "Close navigation menu"
+        );
+
+        if (menuIcon) {
+
+            menuIcon.setAttribute(
+                "data-lucide",
+                "x"
+            );
+
+            lucide.createIcons();
         }
-    );
-
-revealElements.forEach((element) => {
-    observer.observe(element);
-});
+    }
 
 
-/* --------------------------------
-   Current year
--------------------------------- */
+    function closeMenu() {
 
-const yearElement =
-    document.getElementById("year");
+        if (!menuPanel || !menuToggle) return;
 
-if (yearElement) {
-    yearElement.textContent =
-        new Date().getFullYear();
-}
+        menuPanel.classList.remove("open");
 
-
-/* --------------------------------
-   Keyboard accessibility
--------------------------------- */
-
-document.addEventListener("keydown", (event) => {
-
-    if (event.key === "Escape") {
-
-        navLinks?.classList.remove("active");
-
-        mobileMenuButton?.setAttribute(
+        menuToggle.setAttribute(
             "aria-expanded",
             "false"
         );
 
-        const icon =
-            mobileMenuButton?.querySelector("svg");
+        menuToggle.setAttribute(
+            "aria-label",
+            "Open navigation menu"
+        );
 
-        if (icon) {
-            icon.setAttribute(
+        if (menuIcon) {
+
+            menuIcon.setAttribute(
                 "data-lucide",
                 "menu"
             );
@@ -195,7 +148,127 @@ document.addEventListener("keydown", (event) => {
             lucide.createIcons();
         }
     }
-});
-```
+
+
+    menuToggle?.addEventListener("click", () => {
+
+        const isOpen =
+            menuPanel.classList.contains("open");
+
+        if (isOpen) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+
+    });
+
+
+    /* =====================================================
+       CLOSE MENU WHEN LINK IS CLICKED
+    ===================================================== */
+
+    document
+        .querySelectorAll(".menu-link")
+        .forEach((link) => {
+
+            link.addEventListener("click", () => {
+                closeMenu();
+            });
+
+        });
+
+
+    /* =====================================================
+       CLOSE MENU WHEN CLICKING OUTSIDE
+    ===================================================== */
+
+    document.addEventListener("click", (event) => {
+
+        if (!menuPanel || !menuToggle) return;
+
+        const clickedInsideMenu =
+            menuPanel.contains(event.target);
+
+        const clickedMenuButton =
+            menuToggle.contains(event.target);
+
+        if (
+            menuPanel.classList.contains("open") &&
+            !clickedInsideMenu &&
+            !clickedMenuButton
+        ) {
+            closeMenu();
+        }
+
+    });
+
+
+    /* =====================================================
+       ESCAPE KEY
+    ===================================================== */
+
+    document.addEventListener("keydown", (event) => {
+
+        if (event.key === "Escape") {
+            closeMenu();
+        }
+
+    });
+
+
+    /* =====================================================
+       SCROLL REVEAL
+    ===================================================== */
+
+    const revealElements =
+        document.querySelectorAll(".fade-in");
+
+
+    const observer =
+        new IntersectionObserver(
+            (entries, observer) => {
+
+                entries.forEach((entry) => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add(
+                            "visible"
+                        );
+
+                        observer.unobserve(
+                            entry.target
+                        );
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.12,
+                rootMargin: "0px 0px -40px 0px"
+            }
+        );
+
+
+    revealElements.forEach((element) => {
+        observer.observe(element);
+    });
+
+
+    /* =====================================================
+       CURRENT YEAR
+    ===================================================== */
+
+    const yearElement =
+        document.getElementById("year");
+
+    if (yearElement) {
+
+        yearElement.textContent =
+            new Date().getFullYear();
+
+    }
 
 });
