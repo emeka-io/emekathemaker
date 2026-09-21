@@ -1,58 +1,108 @@
 <!DOCTYPE html>
-
 <html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
-<title>ETM — Mechatronics & Robotics</title>
-<meta name="description" content="ETM — Emeka the Maker. A mechatronics engineering student building embedded systems, robotics, automation, and intelligent machines.">
-<link rel="icon" href="logo.png" type="image/png">
+    <title>ETM — Mechatronics & Robotics</title>
+    <meta name="title" content="ETM — Mechatronics & Robotics">
+    <meta name="description" content="ETM — Emeka the Maker. A mechatronics engineering student building embedded systems, robotics, automation, and intelligent machines.">
+    <meta name="author" content="Chukwuemeka Ifeanyi">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 
-<!-- Typography -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <!-- ============================================================
+         BRAND ASSETS: put these two files in the ROOT of your repo,
+         next to index.html, with EXACTLY these names:
 
-<!-- Icons -->
-<script src="https://unpkg.com/lucide@latest"></script>
+           logo.png      square, 512 x 512 px (favicon / app icon)
+           og-image.png  1200 x 630 px (link preview on WhatsApp, X, LinkedIn)
 
-<link rel="stylesheet" href="style.css">
-```
+         If your site is not on emekathemaker.shop, change the domain
+         in the canonical / og:url / og:image / twitter:image lines.
+         When you replace either image later, bump ?v=1 to ?v=2 so
+         browsers and social apps fetch the new one.
+         ============================================================ -->
+    <link rel="icon" href="logo.png?v=1" type="image/png">
+    <link rel="apple-touch-icon" href="logo.png?v=1">
+    <link rel="canonical" href="https://emekathemaker.shop/">
 
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ETM">
+    <meta property="og:title" content="ETM — Mechatronics & Robotics">
+    <meta property="og:description" content="Emeka the Maker. Embedded systems, robotics, automation, and intelligent machines.">
+    <meta property="og:url" content="https://emekathemaker.shop/">
+    <meta property="og:image" content="https://emekathemaker.shop/og-image.png?v=1">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="ETM — Emeka the Maker">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ETM — Mechatronics & Robotics">
+    <meta name="twitter:description" content="Emeka the Maker. Embedded systems, robotics, automation, and intelligent machines.">
+    <meta name="twitter:image" content="https://emekathemaker.shop/og-image.png?v=1">
+
+    <!-- Runs before first paint: theme + reveal safety net (content can never stay hidden) -->
+    <script>
+        (function () {
+            var d = document.documentElement;
+            d.classList.add('js');
+            try {
+                var saved = localStorage.getItem('etm-theme');
+                if (saved === 'dark' || saved === 'light') {
+                    d.setAttribute('data-theme', saved);
+                } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    d.setAttribute('data-theme', 'dark');
+                }
+            } catch (e) {}
+            // If script.js fails to load for any reason, show everything after 3s
+            window.__etmFallback = setTimeout(function () { d.classList.add('no-reveal'); }, 3000);
+        })();
+    </script>
+
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-```
 <!-- Navigation -->
 <nav class="navbar">
     <div class="nav-container">
 
-        <a href="#home" class="brand" aria-label="ETM home">
-            <span class="brand-text">ETM</span>
-        </a>
-
-        <div class="nav-links">
-            <a href="#about">About</a>
-            <a href="#expertise">Expertise</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-
+        <div class="brand-group">
+            <a href="#home" class="brand" aria-label="ETM home">
+                <span class="brand-text">ETM</span>
+            </a>
             <span class="shop-tag">
-                Shop coming soon
+                <span class="shop-dot" aria-hidden="true"></span>Shop coming soon
             </span>
         </div>
 
+        <div class="nav-links" id="nav-links">
+            <a href="#about">About</a>
+            <a href="#expertise">Expertise</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact" class="nav-cta">Let's Talk</a>
+        </div>
+
         <div class="nav-controls">
-            <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
-                <i data-lucide="moon" class="icon-moon"></i>
-                <i data-lucide="sun" class="icon-sun"></i>
+            <button id="theme-toggle" class="theme-btn" type="button" aria-label="Switch to dark mode">
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
             </button>
 
-            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
-                <i data-lucide="menu"></i>
+            <button class="mobile-menu-btn" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
+                <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
             </button>
         </div>
 
@@ -63,15 +113,15 @@
 <!-- Hero / Introduction -->
 <header class="hero" id="home">
     <div class="container">
-        <div class="hero-content fade-in">
+        <div class="hero-content hero-anim">
 
             <div class="eyebrow">
                 Mechatronics Engineering · Robotics · Embedded Systems
             </div>
 
             <h1>
-                I build machines that
-                <span>do something.</span>
+                I build <span class="accent">smart systems</span> that work
+                <span class="accent">outside the lab.</span>
             </h1>
 
             <p class="hero-description">
@@ -87,7 +137,7 @@
             <div class="hero-actions">
                 <a href="#projects" class="btn btn-primary">
                     Explore my work
-                    <i data-lucide="arrow-down"></i>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
                 </a>
 
                 <a href="https://github.com/emeka-io"
@@ -95,7 +145,7 @@
                    rel="noopener noreferrer"
                    class="btn btn-secondary">
                     GitHub
-                    <i data-lucide="arrow-up-right"></i>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg>
                 </a>
             </div>
 
@@ -104,7 +154,7 @@
 </header>
 
 
-<!-- About -->
+<!-- 01 / About -->
 <section class="about" id="about">
     <div class="container fade-in">
 
@@ -114,8 +164,8 @@
 
             <div class="about-intro">
                 <h2>
-                    Learning how to turn
-                    <em>ideas into machines.</em>
+                    Learning how to turn ideas into
+                    <em>working systems.</em>
                 </h2>
             </div>
 
@@ -128,10 +178,10 @@
                 </p>
 
                 <p>
-                    My work starts with small embedded systems and gradually
-                    moves toward more capable machines — from sensors and
-                    microcontrollers to robotics, automation, and autonomous
-                    systems.
+                    I design circuit schematics in KiCad, write low-level
+                    firmware in C/C++, develop autonomous logic with ROS 2
+                    and Python, and validate physical systems in MATLAB and
+                    Simulink.
                 </p>
 
                 <p>
@@ -144,11 +194,38 @@
 
         </div>
 
+        <dl class="facts">
+            <div class="fact">
+                <dt>Studying</dt>
+                <dd>Mechatronics Engineering, FUTA</dd>
+            </div>
+            <div class="fact">
+                <dt>Major Projects</dt>
+                <dd>Genesis Environment Monitor and an autonomous 4WD robot</dd>
+            </div>
+            <div class="fact">
+                <dt>Published</dt>
+                <dd>Co-authored a highway security surveillance paper on Zenodo</dd>
+            </div>
+            <div class="fact">
+                <dt>Languages</dt>
+                <dd>C, C++, Python, Bash</dd>
+            </div>
+            <div class="fact">
+                <dt>Tools</dt>
+                <dd>ROS 2, MATLAB/Simulink, KiCad, Onshape</dd>
+            </div>
+            <div class="fact">
+                <dt>Hardware</dt>
+                <dd>Arduino, ESP32, STM32, sensors</dd>
+            </div>
+        </dl>
+
     </div>
 </section>
 
 
-<!-- Current Focus -->
+<!-- 02 / Current focus -->
 <section class="focus">
     <div class="container fade-in">
 
@@ -198,7 +275,7 @@
 </section>
 
 
-<!-- Skills -->
+<!-- 03 / Toolkit -->
 <section class="expertise" id="expertise">
     <div class="container fade-in">
 
@@ -255,7 +332,7 @@
 </section>
 
 
-<!-- Projects -->
+<!-- 04 / Selected work -->
 <section class="projects" id="projects">
     <div class="container fade-in">
 
@@ -294,7 +371,7 @@
                    rel="noopener noreferrer"
                    class="project-link">
                     View project
-                    <i data-lucide="arrow-up-right"></i>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg>
                 </a>
             </article>
 
@@ -317,9 +394,12 @@
                     Arduino · HC-SR04 · Motors · C++
                 </div>
 
-                <a href="#contact" class="project-link">
-                    Project details
-                    <i data-lucide="arrow-up-right"></i>
+                <a href="https://www.schematik.io/projects/rovie-esp32-line-following-rover-nbn5"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="project-link">
+                    View project
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg>
                 </a>
             </article>
 
@@ -342,9 +422,12 @@
                     Research · CCTV · Systems Analysis
                 </div>
 
-                <a href="#contact" class="project-link">
-                    Read more
-                    <i data-lucide="arrow-up-right"></i>
+                <a href="https://zenodo.org/records/21910378"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="project-link">
+                    View project
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg>
                 </a>
             </article>
 
@@ -354,7 +437,7 @@
 </section>
 
 
-<!-- Philosophy -->
+<!-- 05 / Philosophy -->
 <section class="statement">
     <div class="container fade-in">
 
@@ -374,35 +457,25 @@
 </section>
 
 
-<!-- Contact -->
+<!-- 06 / Contact -->
 <section class="contact" id="contact">
     <div class="container fade-in">
 
-        <div class="contact-grid">
+        <div class="section-marker">06 / Contact</div>
 
-            <div>
-                <div class="section-marker">06 / Contact</div>
+        <div class="contact-box">
+            <h2>Let's build something functional.</h2>
 
-                <h2>
-                    Have something
-                    <em>worth building?</em>
-                </h2>
-            </div>
+            <p>
+                I'm open to engineering projects, robotics, embedded
+                systems, technical collaborations, and opportunities to
+                learn by building.
+            </p>
 
-            <div class="contact-copy">
-                <p>
-                    I'm interested in engineering projects, robotics,
-                    embedded systems, technical collaborations, and
-                    opportunities to learn by building.
-                </p>
-
-                <a href="mailto:hello@emekathemaker.shop"
-                   class="email-link">
-                    hello@emekathemaker.shop
-                    <i data-lucide="arrow-up-right"></i>
-                </a>
-            </div>
-
+            <a href="mailto:theemekamail@gmail.com" class="btn btn-light">
+                theemekamail@gmail.com
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg>
+            </a>
         </div>
 
     </div>
@@ -423,41 +496,31 @@
                target="_blank"
                rel="noopener noreferrer"
                aria-label="X">
-                <i data-lucide="twitter"></i>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
 
             <a href="https://www.linkedin.com/in/chukwuemeka-ifeanyi-profile"
                target="_blank"
                rel="noopener noreferrer"
                aria-label="LinkedIn">
-                <i data-lucide="linkedin"></i>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             </a>
 
             <a href="https://github.com/emeka-io"
                target="_blank"
                rel="noopener noreferrer"
                aria-label="GitHub">
-                <i data-lucide="github"></i>
-            </a>
-
-            <a href="https://instagram.com/builtby.emeka"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="Instagram">
-                <i data-lucide="instagram"></i>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
             </a>
         </div>
 
         <div class="footer-copy">
-            © <span id="year"></span> ETM
+            © <span id="year">2026</span> ETM
         </div>
 
     </div>
 </footer>
 
-
 <script src="script.js"></script>
-```
-
 </body>
 </html>
