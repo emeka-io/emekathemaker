@@ -1,201 +1,97 @@
-document.addEventListener("DOMContentLoaded", () => {
+(function () {
+    "use strict";
 
-```
-/* --------------------------------
-   Lucide Icons
--------------------------------- */
+    // script.js loaded fine: cancel the "show everything" safety net
+    if (window.__etmFallback) clearTimeout(window.__etmFallback);
 
-if (typeof lucide !== "undefined") {
-    lucide.createIcons();
-}
+    var root = document.documentElement;
 
+    /* ---------------- Theme ---------------- */
+    var themeBtn = document.getElementById("theme-toggle");
 
-/* --------------------------------
-   Theme
--------------------------------- */
-
-const root = document.documentElement;
-const themeToggle = document.getElementById("theme-toggle");
-
-const savedTheme = localStorage.getItem("etm-theme");
-
-if (savedTheme === "dark" || savedTheme === "light") {
-    root.setAttribute("data-theme", savedTheme);
-} else {
-    const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-    ).matches;
-
-    root.setAttribute(
-        "data-theme",
-        prefersDark ? "dark" : "light"
-    );
-}
-
-function updateThemeLabel() {
-    const currentTheme = root.getAttribute("data-theme");
-
-    if (themeToggle) {
-        themeToggle.setAttribute(
+    function updateThemeLabel() {
+        if (!themeBtn) return;
+        themeBtn.setAttribute(
             "aria-label",
-            currentTheme === "dark"
+            root.getAttribute("data-theme") === "dark"
                 ? "Switch to light mode"
                 : "Switch to dark mode"
         );
     }
-}
-
-updateThemeLabel();
-
-themeToggle?.addEventListener("click", () => {
-    const currentTheme = root.getAttribute("data-theme");
-    const newTheme =
-        currentTheme === "dark" ? "light" : "dark";
-
-    root.setAttribute("data-theme", newTheme);
-    localStorage.setItem("etm-theme", newTheme);
-
     updateThemeLabel();
-});
 
-
-/* --------------------------------
-   Mobile Navigation
--------------------------------- */
-
-const mobileMenuButton =
-    document.querySelector(".mobile-menu-btn");
-
-const navLinks =
-    document.querySelector(".nav-links");
-
-mobileMenuButton?.addEventListener("click", () => {
-
-    const isOpen =
-        navLinks.classList.toggle("active");
-
-    mobileMenuButton.setAttribute(
-        "aria-expanded",
-        String(isOpen)
-    );
-
-    const icon = mobileMenuButton.querySelector("svg");
-
-    if (icon) {
-        icon.setAttribute(
-            "data-lucide",
-            isOpen ? "x" : "menu"
-        );
-
-        lucide.createIcons();
+    if (themeBtn) {
+        themeBtn.addEventListener("click", function () {
+            var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+            root.setAttribute("data-theme", next);
+            try { localStorage.setItem("etm-theme", next); } catch (e) {}
+            updateThemeLabel();
+        });
     }
-});
 
+    /* ---------------- Mobile menu ---------------- */
+    var menuBtn = document.querySelector(".mobile-menu-btn");
+    var navLinks = document.getElementById("nav-links");
 
-/* --------------------------------
-   Close mobile menu after click
--------------------------------- */
+    function setMenu(open) {
+        if (!menuBtn || !navLinks) return;
+        navLinks.classList.toggle("active", open);
+        menuBtn.setAttribute("aria-expanded", String(open));
+    }
 
-document
-    .querySelectorAll(".nav-links a")
-    .forEach((link) => {
+    if (menuBtn && navLinks) {
+        menuBtn.addEventListener("click", function () {
+            setMenu(!navLinks.classList.contains("active"));
+        });
 
-        link.addEventListener("click", () => {
-            navLinks?.classList.remove("active");
+        navLinks.querySelectorAll("a").forEach(function (link) {
+            link.addEventListener("click", function () { setMenu(false); });
+        });
 
-            mobileMenuButton?.setAttribute(
-                "aria-expanded",
-                "false"
-            );
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape") setMenu(false);
+        });
 
-            const icon =
-                mobileMenuButton?.querySelector("svg");
-
-            if (icon) {
-                icon.setAttribute(
-                    "data-lucide",
-                    "menu"
-                );
-
-                lucide.createIcons();
+        document.addEventListener("click", function (e) {
+            if (navLinks.classList.contains("active") &&
+                !navLinks.contains(e.target) &&
+                !menuBtn.contains(e.target)) {
+                setMenu(false);
             }
         });
-    });
 
-
-/* --------------------------------
-   Scroll reveal
--------------------------------- */
-
-const revealElements =
-    document.querySelectorAll(".fade-in");
-
-const observer =
-    new IntersectionObserver(
-        (entries, observer) => {
-
-            entries.forEach((entry) => {
-
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("visible");
-                    observer.unobserve(entry.target);
-                }
-
-            });
-
-        },
-        {
-            threshold: 0.12,
-            rootMargin: "0px 0px -40px 0px"
-        }
-    );
-
-revealElements.forEach((element) => {
-    observer.observe(element);
-});
-
-
-/* --------------------------------
-   Current year
--------------------------------- */
-
-const yearElement =
-    document.getElementById("year");
-
-if (yearElement) {
-    yearElement.textContent =
-        new Date().getFullYear();
-}
-
-
-/* --------------------------------
-   Keyboard accessibility
--------------------------------- */
-
-document.addEventListener("keydown", (event) => {
-
-    if (event.key === "Escape") {
-
-        navLinks?.classList.remove("active");
-
-        mobileMenuButton?.setAttribute(
-            "aria-expanded",
-            "false"
-        );
-
-        const icon =
-            mobileMenuButton?.querySelector("svg");
-
-        if (icon) {
-            icon.setAttribute(
-                "data-lucide",
-                "menu"
-            );
-
-            lucide.createIcons();
-        }
+        window.addEventListener("resize", function () {
+            if (window.innerWidth > 900) setMenu(false);
+        });
     }
-});
-```
 
-});
+    /* ---------------- Scroll reveal ---------------- */
+    var items = document.querySelectorAll(".fade-in");
+
+    function revealAll() {
+        items.forEach(function (el) { el.classList.add("visible"); });
+    }
+
+    try {
+        if ("IntersectionObserver" in window) {
+            var observer = new IntersectionObserver(function (entries, obs) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0, rootMargin: "0px 0px -6% 0px" });
+
+            items.forEach(function (el) { observer.observe(el); });
+        } else {
+            revealAll();
+        }
+    } catch (e) {
+        revealAll();
+    }
+
+    /* ---------------- Year ---------------- */
+    var year = document.getElementById("year");
+    if (year) year.textContent = new Date().getFullYear();
+})();
