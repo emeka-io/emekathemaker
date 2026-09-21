@@ -1,14 +1,14 @@
-// Initialize Lucide Icons
+// Initialize Icons
 lucide.createIcons();
 
-// Set Dynamic Current Year in Footer
+// Set Year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// --- Dark Mode Logic ---
+// Theme Toggle Logic
 const themeToggleBtn = document.getElementById('theme-toggle');
 const htmlElement = document.documentElement;
 
-// Check local storage for saved theme, otherwise default to light
+// Smoothly transition on load if saved
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme) {
     htmlElement.setAttribute('data-theme', savedTheme);
@@ -22,11 +22,11 @@ themeToggleBtn.addEventListener('click', () => {
     localStorage.setItem('theme', newTheme);
 });
 
-// --- Scroll Reveal Effects ---
+// Scroll Observer (Smoother revealing)
 const observerOptions = {
     root: null,
     rootMargin: '0px',
-    threshold: 0.1
+    threshold: 0.15
 };
 
 const observer = new IntersectionObserver((entries, observer) => {
@@ -42,38 +42,25 @@ document.querySelectorAll('.fade-in').forEach(element => {
     observer.observe(element);
 });
 
-// --- Mobile Navigation Toggle ---
+// Mobile Nav Toggle
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const navLinks = document.querySelector('.nav-links');
 
 mobileMenuBtn.addEventListener('click', () => {
-    if (navLinks.style.display === 'flex') {
-        navLinks.style.display = 'none';
-    } else {
-        navLinks.style.display = 'flex';
-        navLinks.style.flexDirection = 'column';
-        navLinks.style.position = 'absolute';
-        navLinks.style.top = '100%';
-        navLinks.style.left = '0';
-        navLinks.style.width = '100%';
-        // Use CSS variables for seamless mobile menu theme switching
-        navLinks.style.background = 'var(--color-bg)';
-        navLinks.style.padding = '1.5rem 5%';
-        navLinks.style.borderBottom = '1px solid var(--color-border)';
-        navLinks.style.gap = '1.5rem';
-    }
+    navLinks.classList.toggle('active');
+});
+
+// Close mobile nav on click
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        if(window.innerWidth <= 768) {
+            navLinks.classList.remove('active');
+        }
+    });
 });
 
 window.addEventListener('resize', () => {
     if (window.innerWidth > 768) {
-        navLinks.style.display = 'flex';
-        navLinks.style.flexDirection = 'row';
-        navLinks.style.position = 'static';
-        navLinks.style.padding = '0';
-        navLinks.style.background = 'transparent';
-        navLinks.style.borderBottom = 'none';
-        navLinks.style.gap = '2rem';
-    } else {
-        navLinks.style.display = 'none';
+        navLinks.classList.remove('active');
     }
 });
