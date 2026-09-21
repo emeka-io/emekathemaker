@@ -1,111 +1,179 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emeka the Maker</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brandBlue: '#0055ff', // Crisp, electric tech blue
-                    }
-                }
-            }
-        }
-    </script>
-</head>
-<body class="bg-white text-slate-800 dark:bg-[#000000] dark:text-slate-300 font-sans min-h-screen flex flex-col justify-between transition-colors duration-300">
+    
+    <title>Emeka the Maker | Mechatronics & Embedded Systems</title>
+    <meta name="title" content="Emeka the Maker | Mechatronics & Embedded Systems">
+    <meta name="description" content="Portfolio of Chukwuemeka Ifeanyi, specializing in robotics, embedded firmware (C/C++), and autonomous systems hardware.">
+    <link rel="icon" href="logo.png" type="image/png">
 
-    <header class="max-w-5xl w-full mx-auto px-6 sm:px-8 py-6 md:py-10 flex flex-col md:flex-row justify-between items-center gap-6">
-        <div class="text-base sm:text-lg font-bold tracking-widest text-slate-900 dark:text-white uppercase text-center md:text-left">
-            EMEKA THE MAKER<span class="text-brandBlue">.</span>
+    <!-- Open Graph / Social Previews -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://emekathemaker.shop/">
+    <meta property="og:title" content="Emeka the Maker | Mechatronics & Embedded Systems">
+    <meta property="og:description" content="Portfolio of Chukwuemeka Ifeanyi, specializing in robotics, embedded firmware, and autonomous systems.">
+    <meta property="og:image" content="https://emekathemaker.shop/og-image.jpg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="brand">
+                <img src="logo.png" alt="Emeka Logo" class="brand-logo" onerror="this.style.display='none'">
+                <span class="brand-text">Emeka</span>
+            </a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#expertise">Expertise</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact" class="btn btn-outline">Let's Talk</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle Menu"><i data-lucide="menu"></i></button>
         </div>
-        <nav class="flex flex-wrap justify-center items-center gap-4 sm:gap-6 text-xs tracking-wider uppercase font-medium text-slate-500 dark:text-slate-400">
-            <a href="#about" class="hover:text-brandBlue dark:hover:text-brandBlue transition">About</a>
-            <a href="#projects" class="hover:text-brandBlue dark:hover:text-brandBlue transition">Projects</a>
-            <span class="text-[11px] sm:text-xs bg-slate-100 dark:bg-zinc-900 text-brandBlue dark:text-blue-400 px-3 py-1 border border-blue-100 dark:border-zinc-800 font-mono tracking-normal normal-case">Shop Coming Soon</span>
-            
-            <button id="theme-toggle" class="p-1 ml-1 sm:ml-2 text-slate-400 hover:text-brandBlue transition-colors focus:outline-none" aria-label="Toggle dark mode">
-                <svg id="theme-toggle-dark-icon" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-                <svg id="theme-toggle-light-icon" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 14.05a1 1 0 011.414 0l.707.707a1 1 0 11-1.414 1.414l-.707-.707a1 1 0 010-1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-            </button>
-        </nav>
+    </nav>
+
+    <header class="hero" id="home">
+        <div class="hero-content fade-in">
+            <div class="hero-badge">
+                <i data-lucide="cpu" class="badge-icon"></i> Mechatronics Engineering
+            </div>
+            <h1>Building the intersection of <span class="text-blue">code</span> and <span class="text-blue">machinery</span>.</h1>
+            <p>I design embedded systems, program microcontrollers, and develop logic for autonomous robotics and environmental monitoring.</p>
+            <div class="hero-actions">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="https://github.com/emeka-io" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <i data-lucide="github"></i> GitHub
+                </a>
+            </div>
+        </div>
     </header>
 
-    <main id="about" class="max-w-3xl w-full mx-auto px-6 sm:px-8 py-12 sm:py-20 md:py-32 my-auto">
-        <div class="inline-flex items-center gap-2 text-xs font-mono tracking-wider uppercase text-brandBlue mb-6 sm:mb-8">
-            <span class="w-1.5 h-1.5 bg-brandBlue animate-pulse"></span>
-            Building in Public
+    <section class="about" id="about">
+        <div class="container fade-in">
+            <div class="section-header">
+                <h2>About Me</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>I am an undergraduate Mechatronics Engineering student at the Federal University of Technology, Akure, passionate about industrial automation, control engineering, and bringing hardware to life.</p>
+                    <p>My workflow spans designing electronic circuit schematics in KiCad, writing low-level firmware in C/C++, developing autonomous logic with ROS 2 and Python, and validating physical systems using MATLAB and Simulink. I believe in building tools that bridge the digital and physical worlds while documenting the engineering journey.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <i data-lucide="code-2" class="stat-icon"></i>
+                        <h3>Languages</h3>
+                        <p>C, C++, Python, Bash</p>
+                    </div>
+                    <div class="stat-card">
+                        <i data-lucide="wrench" class="stat-icon"></i>
+                        <h3>Tools</h3>
+                        <p>MATLAB/Simulink, KiCad, Onshape</p>
+                    </div>
+                    <div class="stat-card">
+                        <i data-lucide="microchip" class="stat-icon"></i>
+                        <h3>Hardware</h3>
+                        <p>Arduino, ESP32, STM32, Sensors & Actuators</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-slate-950 dark:text-white mb-6 sm:mb-8 leading-tight">
-            Hi, I'm Emeka. <br>
-            I build <span class="border-b-2 border-brandBlue text-slate-900 dark:text-white font-medium">useful & intelligent systems/products</span>.
-        </h1>
-        
-        <p class="text-sm sm:text-base md:text-lg text-slate-500 dark:text-slate-400 font-light leading-relaxed mb-10 sm:mb-12 max-w-xl">
-            I’m a mechatronics engineering undergraduate with a focus on hardware. I work on hardware logic design, embedded systems programming, and technical documentation. This site showcases my latest builds and engineering projects.
-        </p>
+    </section>
 
-        <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
-            <a href="mailto:theemekamail@gmail.com" class="w-full sm:w-auto px-8 py-3.5 bg-slate-950 text-white dark:bg-white dark:text-black hover:bg-brandBlue dark:hover:bg-brandBlue dark:hover:text-white hover:text-white text-xs uppercase tracking-widest font-semibold transition duration-200 text-center shadow-sm">
-                Get in Touch
-            </a>
-            <a href="https://x.com/emekabuilds_?s=11" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-3.5 border border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-slate-400 hover:border-brandBlue dark:hover:border-brandBlue hover:text-brandBlue dark:hover:text-brandBlue text-xs uppercase tracking-widest font-semibold transition duration-200 text-center">
-                Connect on X
-            </a>
+    <section class="expertise bg-light" id="expertise">
+        <div class="container fade-in">
+            <div class="section-header center">
+                <h2>What I Do</h2>
+                <p>Translating logical architecture into physical action.</p>
+            </div>
+            <div class="expertise-grid">
+                <div class="expertise-card">
+                    <div class="icon-wrapper"><i data-lucide="circuit-board"></i></div>
+                    <h3>Embedded Systems</h3>
+                    <p>Developing robust firmware for microcontrollers, managing sensor data acquisition, and implementing finite state machine architectures.</p>
+                </div>
+                <div class="expertise-card">
+                    <div class="icon-wrapper"><i data-lucide="bot"></i></div>
+                    <h3>Autonomous Robotics</h3>
+                    <p>Building robotic platforms, from chassis assembly to motor control logic for line-following, obstacle avoidance, and ROS 2 integration.</p>
+                </div>
+                <div class="expertise-card">
+                    <div class="icon-wrapper"><i data-lucide="activity"></i></div>
+                    <h3>Hardware Integration</h3>
+                    <p>Designing smart systems combining environmental sensors, OLED displays, communication protocols (I2C/SPI), and real-time MATLAB visualization.</p>
+                </div>
+            </div>
         </div>
-    </main>
+    </section>
 
-    <footer class="max-w-5xl w-full mx-auto px-6 sm:px-8 py-6 sm:py-8 border-t border-slate-100 dark:border-zinc-900 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] sm:text-[11px] text-slate-400 dark:text-slate-500 font-mono tracking-wider uppercase">
-        <div class="text-center sm:text-left">
-            &copy; 2026 emekathemaker.shop
+    <section class="projects" id="projects">
+        <div class="container fade-in">
+            <div class="section-header">
+                <h2>Featured Work</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-tags"><span class="tag">Hardware</span><span class="tag">Sensors</span></div>
+                        <h3>Genesis Environment Monitor</h3>
+                        <p>A standalone environmental sensing product evolving from breadboard prototypes. Features DHT11 integration, an RGB LED status interface, and non-blocking timing logic displayed on a 1.3-inch SH1106 OLED.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-tags"><span class="tag">Robotics</span><span class="tag">Control</span></div>
+                        <h3>Autonomous 4WD Robot</h3>
+                        <p>A four-wheel-drive robotics platform built for line-following and obstacle avoidance with the Elites Electronics & Robotics Club. Involved chassis assembly, motor driver wiring, and embedded sensor thresholding.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-tags"><span class="tag">Research</span><span class="tag">Publication</span></div>
+                        <h3>Highway Security Surveillance Assessment</h3>
+                        <p>Co-authored an open-access research paper assessing CCTV surveillance infrastructure for enhancing highway security, focused on a case study of the Third Mainland Bridge in Lagos. Published on Zenodo.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="flex gap-6">
-            <a href="https://github.com/emeka-io" target="_blank" rel="noopener noreferrer" class="hover:text-brandBlue transition-colors">GitHub</a>
-            <a href="https://x.com/emekabuilds_?s=11" target="_blank" rel="noopener noreferrer" class="hover:text-brandBlue transition-colors">X / Twitter</a>
+    </section>
+
+    <section class="contact bg-blue" id="contact">
+        <div class="container fade-in center">
+            <h2>Let's build something functional.</h2>
+            <p>Always open to collaborating on hardware projects, firmware challenges, or discussing mechatronics engineering.</p>
+            <a href="mailto:hello@emekathemaker.shop" class="btn btn-white">Get in Touch</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-brand">Emeka the Maker</div>
+            <div class="footer-social">
+                <a href="https://x.com/emekabuilds_?s=11" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+                    <i data-lucide="twitter"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/chukwuemeka-ifeanyi-profile" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <i data-lucide="linkedin"></i>
+                </a>
+                <a href="https://github.com/emeka-io" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <i data-lucide="github"></i>
+                </a>
+            </div>
+            <div class="footer-copy">
+                &copy; <span id="year"></span> Chukwuemeka Ifeanyi. All rights reserved.
+            </div>
         </div>
     </footer>
 
-    <script>
-        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-        const themeToggleBtn = document.getElementById('theme-toggle');
-
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-            themeToggleLightIcon.classList.remove('hidden');
-        } else {
-            document.documentElement.classList.remove('dark');
-            themeToggleDarkIcon.classList.remove('hidden');
-        }
-
-        themeToggleBtn.addEventListener('click', function() {
-            themeToggleDarkIcon.classList.toggle('hidden');
-            themeToggleLightIcon.classList.toggle('hidden');
-
-            if (localStorage.getItem('color-theme')) {
-                if (localStorage.getItem('color-theme') === 'light') {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('color-theme', 'dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('color-theme', 'light');
-                }
-            } else {
-                if (document.documentElement.classList.contains('dark')) {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('color-theme', 'light');
-                } else {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('color-theme', 'dark');
-                }
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
