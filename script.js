@@ -91,6 +91,19 @@
         revealAll();
     }
 
+    /* ---------------- Deep link: /#socials ---------------- */
+    // Re-scroll once fonts and layout have settled, so the link
+    // lands exactly on the social icons even on slow connections.
+    function goToHash() {
+        if (window.location.hash !== "#socials") return;
+        var target = document.getElementById("socials");
+        if (target) target.scrollIntoView({ block: "center" });
+    }
+    window.addEventListener("load", function () {
+        goToHash();
+        setTimeout(goToHash, 400);
+    });
+
     /* ---------------- Year ---------------- */
     var year = document.getElementById("year");
     if (year) year.textContent = new Date().getFullYear();
