@@ -28,6 +28,11 @@
     --body: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
     --t: 0.35s ease;
+
+    /* Contest-winner accents */
+    --win-badge: #F43F8E;       /* starburst badge */
+    --win-icon:  #FFFFFF;       /* solid trophy */
+    --win-text:  #C2185B;       /* winner label */
 }
 
 [data-theme="dark"] {
@@ -50,6 +55,10 @@
     --shadow-sm: 0 4px 24px rgba(23, 9, 213, 0.18);
     --shadow-md: 0 14px 45px rgba(23, 9, 213, 0.28);
     --shadow-neutral: 0 12px 30px rgba(23, 9, 213, 0.22);
+
+    --win-badge: #FF65A3;
+    --win-icon:  #000000;
+    --win-text:  #FF80AB;
 }
 
 /* ------------------------------ RESET ------------------------------ */
@@ -376,6 +385,16 @@ section {
 .about-text { max-width: 570px; }
 .about-text p + p { margin-top: 1.5rem; }
 
+/* ROVIE link inside the About paragraph: permanent blue, both themes */
+.rovie-link {
+    color: #1709d5;
+    font-weight: 500;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
+    transition: opacity 0.2s ease, border-color var(--t);
+}
+.rovie-link:hover { opacity: 0.75; }
+
 /* Facts table (neutral lines, no blue) */
 .facts {
     margin-top: 6rem;
@@ -522,6 +541,50 @@ section {
 .project-link:hover { color: var(--blue-text); border-color: var(--blue); }
 .project-link svg { width: 13px; height: 13px; }
 
+/* Contest-winner card: badge replaces the category tag (top right) */
+.project-card--winner { scroll-margin-top: 100px; }
+
+.project-top--badge {
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.win-badge {
+    display: block;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+}
+.win-badge svg { width: 100%; height: 100%; overflow: visible; }
+
+.win-badge-star {
+    fill: var(--win-badge);
+    stroke: var(--win-badge);
+    stroke-width: 3;
+    stroke-linejoin: round;
+    transition: fill var(--t), stroke var(--t);
+}
+.win-badge-trophy {
+    fill: var(--win-icon);
+    transition: fill var(--t);
+}
+
+.project-card p.win-label {
+    margin-bottom: 1.5rem;
+    color: var(--win-text);
+    font-family: var(--body);
+    font-size: 0.68rem;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+}
+
+/* Highlight when reached from the About link */
+.project-card.is-highlighted {
+    border-color: var(--blue);
+    box-shadow: var(--shadow-md);
+}
+
 /* ---------------------------- PHILOSOPHY --------------------------- */
 
 .statement-inner { max-width: 900px; }
@@ -627,6 +690,7 @@ footer { padding: 2.5rem 0; border-bottom: none; }
     .project-grid { grid-template-columns: repeat(2, 1fr); }
     .project-card { min-height: 380px; }
     .project-top { margin-bottom: 4rem; }
+    .project-top--badge { margin-bottom: 1.5rem; }
     .project-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
 }
 
@@ -712,6 +776,9 @@ footer { padding: 2.5rem 0; border-bottom: none; }
     .project-card { min-height: auto; padding: 1.6rem; }
     .project-card:last-child:nth-child(odd) { grid-column: auto; }
     .project-top { margin-bottom: 3rem; }
+    .project-top--badge { margin-bottom: 1.25rem; }
+    .win-badge { width: 44px; height: 44px; }
+    .project-card p.win-label { margin-bottom: 1.25rem; }
 
     .hero-actions { flex-direction: column; align-items: stretch; }
     .hero-actions .btn { width: 100%; }
