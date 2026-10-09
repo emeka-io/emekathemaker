@@ -104,6 +104,30 @@
         setTimeout(goToHash, 400);
     });
 
+    /* ---------------- ROVIE link: highlight target card ---------------- */
+    var rovieCard = document.getElementById("rovie-project");
+    var highlightTimer;
+
+    function highlightRovie() {
+        if (!rovieCard) return;
+        rovieCard.classList.add("is-highlighted");
+        clearTimeout(highlightTimer);
+        highlightTimer = setTimeout(function () {
+            rovieCard.classList.remove("is-highlighted");
+        }, 2200);
+    }
+
+    document.querySelectorAll('a[href="#rovie-project"]').forEach(function (link) {
+        link.addEventListener("click", function () {
+            // Works even if the hash is already #rovie-project
+            highlightRovie();
+        });
+    });
+
+    window.addEventListener("load", function () {
+        if (window.location.hash === "#rovie-project") highlightRovie();
+    });
+
     /* ---------------- Year ---------------- */
     var year = document.getElementById("year");
     if (year) year.textContent = new Date().getFullYear();
