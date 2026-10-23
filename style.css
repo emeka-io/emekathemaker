@@ -300,9 +300,35 @@ p {
 .hero-actions {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 0.8rem;
     margin-top: 2.5rem;
 }
+
+/* Hero social squares (GitHub, LinkedIn, X, Instagram) */
+.hero-socials {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+.hero-socials a {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 46px;
+    height: 46px;
+    color: var(--text-muted);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    transition: color var(--t), border-color var(--t), transform 0.25s ease;
+}
+.hero-socials a:hover {
+    color: var(--blue-text);
+    border-color: var(--blue);
+    transform: translateY(-2px);
+}
+.hero-socials svg { width: 18px; height: 18px; }
 
 /* ----------------------------- BUTTONS ----------------------------- */
 
@@ -782,6 +808,8 @@ footer { padding: 2.5rem 0; border-bottom: none; }
 
     .hero-actions { flex-direction: column; align-items: stretch; }
     .hero-actions .btn { width: 100%; }
+    /* squares span the button's width, evenly spaced, flush with both edges */
+    .hero-socials { width: 100%; justify-content: space-between; gap: 0; }
 
     .contact { padding: 80px 0 100px; }
     .contact-box { padding: 3rem 1.5rem; }
